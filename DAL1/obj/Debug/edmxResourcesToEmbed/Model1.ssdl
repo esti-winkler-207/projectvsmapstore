@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="information">
+    <Key>
+      <PropertyRef Name="idinfo" />
+    </Key>
+    <Property Name="idPlace" Type="int" Nullable="false" />
+    <Property Name="idTime" Type="int" Nullable="false" />
+    <Property Name="numPepol" Type="int" Nullable="false" />
+    <Property Name="avg" Type="int" Nullable="false" />
+    <Property Name="stieeeeeeee" Type="int" Nullable="false" />
+    <Property Name="max" Type="int" Nullable="false" />
+    <Property Name="min" Type="int" Nullable="false" />
+    <Property Name="timeofYaer" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="commend" Type="varchar(max)" />
+    <Property Name="idperson" Type="int" Nullable="false" />
+    <Property Name="idinfo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="idperson" />
+    </Key>
+    <Property Name="idperson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Pwd" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Place">
+    <Key>
+      <PropertyRef Name="idPlace" />
+    </Key>
+    <Property Name="idPlace" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="lat" Type="float" Nullable="false" />
+    <Property Name="lan" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Data.dbo.prop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="prop">
+    <Key>
+      <PropertyRef Name="AC" />
+      <PropertyRef Name="Parking" />
+      <PropertyRef Name="DParking" />
+      <PropertyRef Name="Eleveter" />
+      <PropertyRef Name="Negisot" />
+      <PropertyRef Name="id sale" />
+      <PropertyRef Name="id store" />
+      <PropertyRef Name="idPlace" />
+    </Key>
+    <Property Name="AC" Type="bit" Nullable="false" />
+    <Property Name="Parking" Type="bit" Nullable="false" />
+    <Property Name="DParking" Type="bit" Nullable="false" />
+    <Property Name="Eleveter" Type="bit" Nullable="false" />
+    <Property Name="Negisot" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="id sale" Type="int" Nullable="false" />
+    <Property Name="id store" Type="int" Nullable="false" />
+    <Property Name="idPlace" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sale Time">
+    <Key>
+      <PropertyRef Name="idSale" />
+    </Key>
+    <Property Name="idSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="storid" Type="int" Nullable="false" />
+    <Property Name="start" Type="datetime" Nullable="false" />
+    <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="saleName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Describe" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Data.dbo.store' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="store">
+    <Key>
+      <PropertyRef Name="id store" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="idPlace" />
+    </Key>
+    <Property Name="id store" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="idPlace" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Table_1">
+    <Key>
+      <PropertyRef Name="id sale" />
+      <PropertyRef Name="id store" />
+    </Key>
+    <Property Name="id sale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id store" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="time">
+    <Key>
+      <PropertyRef Name="idTime" />
+    </Key>
+    <Property Name="idTime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="from" Type="datetime" Nullable="false" />
+    <Property Name="until" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Updates">
+    <Key>
+      <PropertyRef Name="idUpdats" />
+    </Key>
+    <Property Name="idUpdats" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPlace" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="count" Type="int" Nullable="false" />
+    <Property Name="ip" Type="int" Nullable="false" />
+    <Property Name="ps" Type="varchar(max)" Nullable="false" />
+    <Property Name="idSale" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_information_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="idperson" />
+      </Principal>
+      <Dependent Role="information">
+        <PropertyRef Name="idperson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_information_Place">
+    <End Role="Place" Type="Self.Place" Multiplicity="1" />
+    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="idPlace" />
+      </Principal>
+      <Dependent Role="information">
+        <PropertyRef Name="idPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_information_time">
+    <End Role="time" Type="Self.time" Multiplicity="1" />
+    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time">
+        <PropertyRef Name="idTime" />
+      </Principal>
+      <Dependent Role="information">
+        <PropertyRef Name="idPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Updates_Place">
+    <End Role="Place" Type="Self.Place" Multiplicity="1" />
+    <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="idPlace" />
+      </Principal>
+      <Dependent Role="Updates">
+        <PropertyRef Name="idPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Updates_Sale Time">
+    <End Role="Sale Time" Type="Self.Sale Time" Multiplicity="1" />
+    <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale Time">
+        <PropertyRef Name="idSale" />
+      </Principal>
+      <Dependent Role="Updates">
+        <PropertyRef Name="idSale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="information" EntityType="Self.information" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sale Time" EntityType="Self.Sale Time" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="time" EntityType="Self.time" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="prop" EntityType="Self.prop" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [prop].[AC] AS [AC], 
+    [prop].[Parking] AS [Parking], 
+    [prop].[DParking] AS [DParking], 
+    [prop].[Eleveter] AS [Eleveter], 
+    [prop].[Negisot] AS [Negisot], 
+    [prop].[id sale] AS [id sale], 
+    [prop].[id store] AS [id store], 
+    [prop].[idPlace] AS [idPlace]
+    FROM [dbo].[prop] AS [prop]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="store" EntityType="Self.store" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [store].[id store] AS [id store], 
+    [store].[type] AS [type], 
+    [store].[idPlace] AS [idPlace]
+    FROM [dbo].[store] AS [store]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Table_1" EntityType="Self.Table_1" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Table_1].[id sale] AS [id sale], 
+    [Table_1].[id store] AS [id store]
+    FROM [dbo].[Table_1] AS [Table_1]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_information_Person" Association="Self.FK_information_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_Place" Association="Self.FK_information_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_time" Association="Self.FK_information_time">
+      <End Role="time" EntitySet="time" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Updates_Place" Association="Self.FK_Updates_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="Updates" EntitySet="Updates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Updates_Sale Time" Association="Self.FK_Updates_Sale Time">
+      <End Role="Sale Time" EntitySet="Sale Time" />
+      <End Role="Updates" EntitySet="Updates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

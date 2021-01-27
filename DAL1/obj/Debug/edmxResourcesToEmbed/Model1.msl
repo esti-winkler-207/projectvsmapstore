@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities7">
+    <EntitySetMapping Name="information">
+      <EntityTypeMapping TypeName="DataModel.information">
+        <MappingFragment StoreEntitySet="information">
+          <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+          <ScalarProperty Name="idTime" ColumnName="idTime" />
+          <ScalarProperty Name="numPepol" ColumnName="numPepol" />
+          <ScalarProperty Name="avg" ColumnName="avg" />
+          <ScalarProperty Name="stieeeeeeee" ColumnName="stieeeeeeee" />
+          <ScalarProperty Name="max" ColumnName="max" />
+          <ScalarProperty Name="min" ColumnName="min" />
+          <ScalarProperty Name="timeofYaer" ColumnName="timeofYaer" />
+          <ScalarProperty Name="commend" ColumnName="commend" />
+          <ScalarProperty Name="idperson" ColumnName="idperson" />
+          <ScalarProperty Name="idinfo" ColumnName="idinfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Person">
+      <EntityTypeMapping TypeName="DataModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="idperson" ColumnName="idperson" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Place">
+      <EntityTypeMapping TypeName="DataModel.Place">
+        <MappingFragment StoreEntitySet="Place">
+          <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lan" ColumnName="lan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sale_Time">
+      <EntityTypeMapping TypeName="DataModel.Sale_Time">
+        <MappingFragment StoreEntitySet="Sale Time">
+          <ScalarProperty Name="idSale" ColumnName="idSale" />
+          <ScalarProperty Name="storid" ColumnName="storid" />
+          <ScalarProperty Name="start" ColumnName="start" />
+          <ScalarProperty Name="end" ColumnName="end" />
+          <ScalarProperty Name="saleName" ColumnName="saleName" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="time">
+      <EntityTypeMapping TypeName="DataModel.time">
+        <MappingFragment StoreEntitySet="time">
+          <ScalarProperty Name="idTime" ColumnName="idTime" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="from" ColumnName="from" />
+          <ScalarProperty Name="until" ColumnName="until" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Updates">
+      <EntityTypeMapping TypeName="DataModel.Updates">
+        <MappingFragment StoreEntitySet="Updates">
+          <ScalarProperty Name="idUpdats" ColumnName="idUpdats" />
+          <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="ps" ColumnName="ps" />
+          <ScalarProperty Name="idSale" ColumnName="idSale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prop">
+      <EntityTypeMapping TypeName="DataModel.prop">
+        <MappingFragment StoreEntitySet="prop">
+          <ScalarProperty Name="AC" ColumnName="AC" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
+          <ScalarProperty Name="DParking" ColumnName="DParking" />
+          <ScalarProperty Name="Eleveter" ColumnName="Eleveter" />
+          <ScalarProperty Name="Negisot" ColumnName="Negisot" />
+          <ScalarProperty Name="id_sale" ColumnName="id sale" />
+          <ScalarProperty Name="id_store" ColumnName="id store" />
+          <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="store">
+      <EntityTypeMapping TypeName="DataModel.store">
+        <MappingFragment StoreEntitySet="store">
+          <ScalarProperty Name="id_store" ColumnName="id store" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_1">
+      <EntityTypeMapping TypeName="DataModel.Table_1">
+        <MappingFragment StoreEntitySet="Table_1">
+          <ScalarProperty Name="id_sale" ColumnName="id sale" />
+          <ScalarProperty Name="id_store" ColumnName="id store" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

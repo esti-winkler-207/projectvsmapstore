@@ -1,0 +1,16 @@
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\BL.dll
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\BL.pdb
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\obj\Debug\BL.dll
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\obj\Debug\BL.pdb
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\DTO.dll
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\DTO.pdb
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\DAL1.pdb
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\DAL1.dll.config
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\EntityFramework.xml
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\DAL1.dll
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\EntityFramework.dll
+C:\Users\User\Desktop\אהובה\פרויקט גמר\BL\bin\Debug\EntityFramework.SqlServer.dll
