@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
     [RoutePrefix("api/information")]
     public class informationController : ApiController
            {
-              DataEntities7 DB = new DataEntities7();
+             
         [Route("GetAll")]
         [HttpGet]
         public IHttpActionResult Get()

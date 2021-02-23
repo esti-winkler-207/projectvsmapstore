@@ -7,14 +7,13 @@ using System.Web.Http;
 using DTO;
 using BLL;
 using DAL1;
-
 namespace WebApplication2.Controllers
 {
     [RoutePrefix("api/person")]
     public class personController : ApiController
     {
     
-            DataEntities7 DB = new DataEntities7();
+            
             [Route("GetAll")]
             [HttpGet]
             public IHttpActionResult Get()

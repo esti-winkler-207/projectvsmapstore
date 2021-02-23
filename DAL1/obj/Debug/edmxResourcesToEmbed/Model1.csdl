@@ -1,5 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DataEntities771" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="information" EntityType="DataModel.information" />
+    <EntitySet Name="Person" EntityType="DataModel.Person" />
+    <EntitySet Name="Place" EntityType="DataModel.Place" />
+    <EntitySet Name="prop" EntityType="DataModel.prop" />
+    <EntitySet Name="Sale_Time" EntityType="DataModel.Sale_Time" />
+    <EntitySet Name="store" EntityType="DataModel.store" />
+    <EntitySet Name="sysdiagrams" EntityType="DataModel.sysdiagrams" />
+    <EntitySet Name="time" EntityType="DataModel.time" />
+    <EntitySet Name="Updates" EntityType="DataModel.Updates" />
+    <EntitySet Name="Table_1" EntityType="DataModel.Table_1" />
+    <AssociationSet Name="FK_information_Person" Association="DataModel.FK_information_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_Place" Association="DataModel.FK_information_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_time" Association="DataModel.FK_information_time">
+      <End Role="time" EntitySet="time" />
+      <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_store_Place" Association="DataModel.FK_store_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="store" EntitySet="store" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Updates_Place" Association="DataModel.FK_Updates_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="Updates" EntitySet="Updates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prop_Sale_Time" Association="DataModel.FK_prop_Sale_Time">
+      <End Role="Sale_Time" EntitySet="Sale_Time" />
+      <End Role="prop" EntitySet="prop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prop_store" Association="DataModel.FK_prop_store">
+      <End Role="store" EntitySet="store" />
+      <End Role="prop" EntitySet="prop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Updates_Sale_Time" Association="DataModel.FK_Updates_Sale_Time">
+      <End Role="Sale_Time" EntitySet="Sale_Time" />
+      <End Role="Updates" EntitySet="Updates" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="information">
     <Key>
       <PropertyRef Name="idinfo" />
@@ -11,13 +55,13 @@
     <Property Name="stieeeeeeee" Type="Int32" Nullable="false" />
     <Property Name="max" Type="Int32" Nullable="false" />
     <Property Name="min" Type="Int32" Nullable="false" />
-    <Property Name="timeofYaer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="timeofYaer" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="commend" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="idperson" Type="Int32" Nullable="false" />
     <Property Name="idinfo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Person" Relationship="Self.FK_information_Person" FromRole="information" ToRole="Person" />
-    <NavigationProperty Name="Place" Relationship="Self.FK_information_Place" FromRole="information" ToRole="Place" />
-    <NavigationProperty Name="time" Relationship="Self.FK_information_time" FromRole="information" ToRole="time" />
+    <NavigationProperty Name="Person" Relationship="DataModel.FK_information_Person" FromRole="information" ToRole="Person" />
+    <NavigationProperty Name="Place" Relationship="DataModel.FK_information_Place" FromRole="information" ToRole="Place" />
+    <NavigationProperty Name="time" Relationship="DataModel.FK_information_time" FromRole="information" ToRole="time" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -25,9 +69,9 @@
     </Key>
     <Property Name="idperson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="information" Relationship="Self.FK_information_Person" FromRole="Person" ToRole="information" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="information" Relationship="DataModel.FK_information_Person" FromRole="Person" ToRole="information" />
   </EntityType>
   <EntityType Name="Place">
     <Key>
@@ -37,8 +81,29 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="lat" Type="Double" Nullable="false" />
     <Property Name="lan" Type="Double" Nullable="false" />
-    <NavigationProperty Name="information" Relationship="Self.FK_information_Place" FromRole="Place" ToRole="information" />
-    <NavigationProperty Name="Updates" Relationship="Self.FK_Updates_Place" FromRole="Place" ToRole="Updates" />
+    <NavigationProperty Name="information" Relationship="DataModel.FK_information_Place" FromRole="Place" ToRole="information" />
+    <NavigationProperty Name="store" Relationship="DataModel.FK_store_Place" FromRole="Place" ToRole="store" />
+    <NavigationProperty Name="Updates" Relationship="DataModel.FK_Updates_Place" FromRole="Place" ToRole="Updates" />
+  </EntityType>
+  <EntityType Name="prop">
+    <Key>
+      <PropertyRef Name="id_prop" />
+    </Key>
+    <Property Name="Cleanlike" Type="Int32" Nullable="false" />
+    <Property Name="Parkinglike" Type="Int32" Nullable="false" />
+    <Property Name="DParkinglike" Type="Int32" Nullable="false" />
+    <Property Name="Eleveterlike" Type="Int32" Nullable="false" />
+    <Property Name="Negisotlike" Type="Int32" Nullable="false" />
+    <Property Name="id_sale" Type="Int32" Nullable="false" />
+    <Property Name="id_store" Type="Int32" Nullable="false" />
+    <Property Name="Cleandislike" Type="Int32" Nullable="false" />
+    <Property Name="Parkingdislike" Type="Int32" Nullable="false" />
+    <Property Name="DParkingdislike" Type="Int32" Nullable="false" />
+    <Property Name="Elevatordislike" Type="Int32" Nullable="false" />
+    <Property Name="Negisotdislike" Type="Int32" Nullable="false" />
+    <Property Name="id_prop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Sale_Time" Relationship="DataModel.FK_prop_Sale_Time" FromRole="prop" ToRole="Sale_Time" />
+    <NavigationProperty Name="store" Relationship="DataModel.FK_prop_store" FromRole="prop" ToRole="store" />
   </EntityType>
   <EntityType Name="Sale_Time">
     <Key>
@@ -48,19 +113,40 @@
     <Property Name="storid" Type="Int32" Nullable="false" />
     <Property Name="start" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="end" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="saleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Updates" Relationship="Self.FK_Updates_Sale_Time" FromRole="Sale_Time" ToRole="Updates" />
+    <Property Name="saleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Describe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="prop" Relationship="DataModel.FK_prop_Sale_Time" FromRole="Sale_Time" ToRole="prop" />
+    <NavigationProperty Name="Updates" Relationship="DataModel.FK_Updates_Sale_Time" FromRole="Sale_Time" ToRole="Updates" />
+  </EntityType>
+  <EntityType Name="store">
+    <Key>
+      <PropertyRef Name="id_store" />
+    </Key>
+    <Property Name="id_store" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idPlace" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Place" Relationship="DataModel.FK_store_Place" FromRole="store" ToRole="Place" />
+    <NavigationProperty Name="prop" Relationship="DataModel.FK_prop_store" FromRole="store" ToRole="prop" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="time">
     <Key>
       <PropertyRef Name="idTime" />
     </Key>
     <Property Name="idTime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="from" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="until" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="information" Relationship="Self.FK_information_time" FromRole="time" ToRole="information" />
+    <NavigationProperty Name="information" Relationship="DataModel.FK_information_time" FromRole="time" ToRole="information" />
   </EntityType>
   <EntityType Name="Updates">
     <Key>
@@ -72,40 +158,10 @@
     <Property Name="time" Type="Time" Nullable="false" Precision="7" />
     <Property Name="count" Type="Int32" Nullable="false" />
     <Property Name="ip" Type="Int32" Nullable="false" />
-    <Property Name="ps" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="idSale" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Place" Relationship="Self.FK_Updates_Place" FromRole="Updates" ToRole="Place" />
-    <NavigationProperty Name="Sale_Time" Relationship="Self.FK_Updates_Sale_Time" FromRole="Updates" ToRole="Sale_Time" />
-  </EntityType>
-  <EntityType Name="prop">
-    <Key>
-      <PropertyRef Name="AC" />
-      <PropertyRef Name="Parking" />
-      <PropertyRef Name="DParking" />
-      <PropertyRef Name="Eleveter" />
-      <PropertyRef Name="Negisot" />
-      <PropertyRef Name="id_sale" />
-      <PropertyRef Name="id_store" />
-      <PropertyRef Name="idPlace" />
-    </Key>
-    <Property Name="AC" Type="Boolean" Nullable="false" />
-    <Property Name="Parking" Type="Boolean" Nullable="false" />
-    <Property Name="DParking" Type="Boolean" Nullable="false" />
-    <Property Name="Eleveter" Type="Boolean" Nullable="false" />
-    <Property Name="Negisot" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="id_sale" Type="Int32" Nullable="false" />
-    <Property Name="id_store" Type="Int32" Nullable="false" />
-    <Property Name="idPlace" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="store">
-    <Key>
-      <PropertyRef Name="id_store" />
-      <PropertyRef Name="type" />
-      <PropertyRef Name="idPlace" />
-    </Key>
-    <Property Name="id_store" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="idPlace" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Place" Relationship="DataModel.FK_Updates_Place" FromRole="Updates" ToRole="Place" />
+    <NavigationProperty Name="Sale_Time" Relationship="DataModel.FK_Updates_Sale_Time" FromRole="Updates" ToRole="Sale_Time" />
   </EntityType>
   <EntityType Name="Table_1">
     <Key>
@@ -116,8 +172,8 @@
     <Property Name="id_store" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_information_Person">
-    <End Role="Person" Type="Self.Person" Multiplicity="1" />
-    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <End Type="DataModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="DataModel.information" Role="information" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Person">
         <PropertyRef Name="idperson" />
@@ -128,8 +184,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_information_Place">
-    <End Role="Place" Type="Self.Place" Multiplicity="1" />
-    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+    <End Type="DataModel.information" Role="information" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Place">
         <PropertyRef Name="idPlace" />
@@ -140,8 +196,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_information_time">
-    <End Role="time" Type="Self.time" Multiplicity="1" />
-    <End Role="information" Type="Self.information" Multiplicity="*" />
+    <End Type="DataModel.time" Role="time" Multiplicity="1" />
+    <End Type="DataModel.information" Role="information" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="time">
         <PropertyRef Name="idTime" />
@@ -151,9 +207,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_store_Place">
+    <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+    <End Type="DataModel.store" Role="store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="idPlace" />
+      </Principal>
+      <Dependent Role="store">
+        <PropertyRef Name="idPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Updates_Place">
-    <End Role="Place" Type="Self.Place" Multiplicity="1" />
-    <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+    <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+    <End Type="DataModel.Updates" Role="Updates" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Place">
         <PropertyRef Name="idPlace" />
@@ -163,9 +231,33 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_prop_Sale_Time">
+    <End Type="DataModel.Sale_Time" Role="Sale_Time" Multiplicity="1" />
+    <End Type="DataModel.prop" Role="prop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale_Time">
+        <PropertyRef Name="idSale" />
+      </Principal>
+      <Dependent Role="prop">
+        <PropertyRef Name="id_sale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prop_store">
+    <End Type="DataModel.store" Role="store" Multiplicity="1" />
+    <End Type="DataModel.prop" Role="prop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="store">
+        <PropertyRef Name="id_store" />
+      </Principal>
+      <Dependent Role="prop">
+        <PropertyRef Name="id_store" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Updates_Sale_Time">
-    <End Role="Sale_Time" Type="Self.Sale_Time" Multiplicity="1" />
-    <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+    <End Type="DataModel.Sale_Time" Role="Sale_Time" Multiplicity="1" />
+    <End Type="DataModel.Updates" Role="Updates" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sale_Time">
         <PropertyRef Name="idSale" />
@@ -175,35 +267,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DataEntities7" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="information" EntityType="Self.information" />
-    <EntitySet Name="Person" EntityType="Self.Person" />
-    <EntitySet Name="Place" EntityType="Self.Place" />
-    <EntitySet Name="Sale_Time" EntityType="Self.Sale_Time" />
-    <EntitySet Name="time" EntityType="Self.time" />
-    <EntitySet Name="Updates" EntityType="Self.Updates" />
-    <EntitySet Name="prop" EntityType="Self.prop" />
-    <EntitySet Name="store" EntityType="Self.store" />
-    <EntitySet Name="Table_1" EntityType="Self.Table_1" />
-    <AssociationSet Name="FK_information_Person" Association="Self.FK_information_Person">
-      <End Role="Person" EntitySet="Person" />
-      <End Role="information" EntitySet="information" />
-    </AssociationSet>
-    <AssociationSet Name="FK_information_Place" Association="Self.FK_information_Place">
-      <End Role="Place" EntitySet="Place" />
-      <End Role="information" EntitySet="information" />
-    </AssociationSet>
-    <AssociationSet Name="FK_information_time" Association="Self.FK_information_time">
-      <End Role="time" EntitySet="time" />
-      <End Role="information" EntitySet="information" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Updates_Place" Association="Self.FK_Updates_Place">
-      <End Role="Place" EntitySet="Place" />
-      <End Role="Updates" EntitySet="Updates" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Updates_Sale_Time" Association="Self.FK_Updates_Sale_Time">
-      <End Role="Sale_Time" EntitySet="Sale_Time" />
-      <End Role="Updates" EntitySet="Updates" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

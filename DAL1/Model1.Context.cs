@@ -13,10 +13,10 @@ namespace DAL1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DataEntities7 : DbContext
+    public partial class DataEntities771 : DbContext
     {
-        public DataEntities7()
-            : base("name=DataEntities7")
+        public DataEntities771()
+            : base("name=DataEntities771")
         {
         }
     
@@ -28,11 +28,12 @@ namespace DAL1
         public virtual DbSet<information> information { get; set; }
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Place> Place { get; set; }
+        public virtual DbSet<prop> prop { get; set; }
         public virtual DbSet<Sale_Time> Sale_Time { get; set; }
+        public virtual DbSet<store> store { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<time> time { get; set; }
         public virtual DbSet<Updates> Updates { get; set; }
-        public virtual DbSet<prop> prop { get; set; }
-        public virtual DbSet<store> store { get; set; }
         public virtual DbSet<Table_1> Table_1 { get; set; }
     }
 }

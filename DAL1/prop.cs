@@ -14,13 +14,21 @@ namespace DAL1
     
     public partial class prop
     {
-        public bool AC { get; set; }
-        public bool Parking { get; set; }
-        public bool DParking { get; set; }
-        public bool Eleveter { get; set; }
-        public string Negisot { get; set; }
+        public int Cleanlike { get; set; }
+        public int Parkinglike { get; set; }
+        public int DParkinglike { get; set; }
+        public int Eleveterlike { get; set; }
+        public int Negisotlike { get; set; }
         public int id_sale { get; set; }
         public int id_store { get; set; }
-        public int idPlace { get; set; }
+        public int Cleandislike { get; set; }
+        public int Parkingdislike { get; set; }
+        public int DParkingdislike { get; set; }
+        public int Elevatordislike { get; set; }
+        public int Negisotdislike { get; set; }
+        public int id_prop { get; set; }
+    
+        public virtual Sale_Time Sale_Time { get; set; }
+        public virtual store store { get; set; }
     }
 }

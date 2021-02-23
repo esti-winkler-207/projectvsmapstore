@@ -34,27 +34,23 @@
     <Property Name="lat" Type="float" Nullable="false" />
     <Property Name="lan" Type="float" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Data.dbo.prop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="prop">
     <Key>
-      <PropertyRef Name="AC" />
-      <PropertyRef Name="Parking" />
-      <PropertyRef Name="DParking" />
-      <PropertyRef Name="Eleveter" />
-      <PropertyRef Name="Negisot" />
-      <PropertyRef Name="id sale" />
-      <PropertyRef Name="id store" />
-      <PropertyRef Name="idPlace" />
+      <PropertyRef Name="id_prop" />
     </Key>
-    <Property Name="AC" Type="bit" Nullable="false" />
-    <Property Name="Parking" Type="bit" Nullable="false" />
-    <Property Name="DParking" Type="bit" Nullable="false" />
-    <Property Name="Eleveter" Type="bit" Nullable="false" />
-    <Property Name="Negisot" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="id sale" Type="int" Nullable="false" />
+    <Property Name="Cleanlike" Type="int" Nullable="false" />
+    <Property Name="Parkinglike" Type="int" Nullable="false" />
+    <Property Name="DParkinglike" Type="int" Nullable="false" />
+    <Property Name="Eleveterlike" Type="int" Nullable="false" />
+    <Property Name="Negisotlike" Type="int" Nullable="false" />
+    <Property Name="id_sale" Type="int" Nullable="false" />
     <Property Name="id store" Type="int" Nullable="false" />
-    <Property Name="idPlace" Type="int" Nullable="false" />
+    <Property Name="Cleandislike" Type="int" Nullable="false" />
+    <Property Name="Parkingdislike" Type="int" Nullable="false" />
+    <Property Name="DParkingdislike" Type="int" Nullable="false" />
+    <Property Name="Elevatordislike" Type="int" Nullable="false" />
+    <Property Name="Negisotdislike" Type="int" Nullable="false" />
+    <Property Name="id_prop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Sale Time">
     <Key>
@@ -67,17 +63,23 @@ warning 6002: The table/view 'Data.dbo.prop' does not have a primary key defined
     <Property Name="saleName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Describe" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Data.dbo.store' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="store">
     <Key>
       <PropertyRef Name="id store" />
-      <PropertyRef Name="type" />
-      <PropertyRef Name="idPlace" />
     </Key>
     <Property Name="id store" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="idPlace" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -147,6 +149,42 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_prop_Sale Time">
+    <End Role="Sale Time" Type="Self.Sale Time" Multiplicity="1" />
+    <End Role="prop" Type="Self.prop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale Time">
+        <PropertyRef Name="idSale" />
+      </Principal>
+      <Dependent Role="prop">
+        <PropertyRef Name="id_sale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prop_store">
+    <End Role="store" Type="Self.store" Multiplicity="1" />
+    <End Role="prop" Type="Self.prop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="store">
+        <PropertyRef Name="id store" />
+      </Principal>
+      <Dependent Role="prop">
+        <PropertyRef Name="id store" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_store_Place">
+    <End Role="Place" Type="Self.Place" Multiplicity="1" />
+    <End Role="store" Type="Self.store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="idPlace" />
+      </Principal>
+      <Dependent Role="store">
+        <PropertyRef Name="idPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Updates_Place">
     <End Role="Place" Type="Self.Place" Multiplicity="1" />
     <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
@@ -175,28 +213,12 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
     <EntitySet Name="information" EntityType="Self.information" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="prop" EntityType="Self.prop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sale Time" EntityType="Self.Sale Time" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="time" EntityType="Self.time" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="prop" EntityType="Self.prop" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [prop].[AC] AS [AC], 
-    [prop].[Parking] AS [Parking], 
-    [prop].[DParking] AS [DParking], 
-    [prop].[Eleveter] AS [Eleveter], 
-    [prop].[Negisot] AS [Negisot], 
-    [prop].[id sale] AS [id sale], 
-    [prop].[id store] AS [id store], 
-    [prop].[idPlace] AS [idPlace]
-    FROM [dbo].[prop] AS [prop]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="store" EntityType="Self.store" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [store].[id store] AS [id store], 
-    [store].[type] AS [type], 
-    [store].[idPlace] AS [idPlace]
-    FROM [dbo].[store] AS [store]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="Table_1" EntityType="Self.Table_1" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Table_1].[id sale] AS [id sale], 
@@ -214,6 +236,18 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
     <AssociationSet Name="FK_information_time" Association="Self.FK_information_time">
       <End Role="time" EntitySet="time" />
       <End Role="information" EntitySet="information" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prop_Sale Time" Association="Self.FK_prop_Sale Time">
+      <End Role="Sale Time" EntitySet="Sale Time" />
+      <End Role="prop" EntitySet="prop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prop_store" Association="Self.FK_prop_store">
+      <End Role="store" EntitySet="store" />
+      <End Role="prop" EntitySet="prop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_store_Place" Association="Self.FK_store_Place">
+      <End Role="Place" EntitySet="Place" />
+      <End Role="store" EntitySet="store" />
     </AssociationSet>
     <AssociationSet Name="FK_Updates_Place" Association="Self.FK_Updates_Place">
       <End Role="Place" EntitySet="Place" />

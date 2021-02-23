@@ -10,14 +10,14 @@ namespace DAL1
     {
         public static List<information> getAll()
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 return db.information.ToList();
             }
         }
         public static List<information> AddInformation()
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 return db.information.ToList();
 
@@ -25,7 +25,7 @@ namespace DAL1
         }
         public static List<information> DeleteInformation()
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 return db.information.ToList();
 
@@ -34,7 +34,7 @@ namespace DAL1
 
  public static List<information> UpdateInformation()
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 return db.information.ToList();
 
@@ -42,7 +42,7 @@ namespace DAL1
         }
         public static Person getByNameAndPwd(string name, string pwd)
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 //for (int i = 0; i < db.information.Count(); i++)
                 //{

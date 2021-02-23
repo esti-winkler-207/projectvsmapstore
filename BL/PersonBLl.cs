@@ -10,7 +10,7 @@ namespace BLL
 {
     public class PersonBLL
     {
-        static DataEntities7 MyDB = new DataEntities7();
+        static DataEntities771 MyDB = new DataEntities771();
 
         //GetAllPerson
         public static List<PersonDTO> GetAll()
@@ -23,7 +23,7 @@ namespace BLL
         {
             try
             {
-                using (DataEntities7 MyDB = new DataEntities7())
+                using (DataEntities771 MyDB = new DataEntities771())
 
                 {
                     MyDB.Person.Add(u);

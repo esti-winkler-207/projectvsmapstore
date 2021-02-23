@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="information">
           <Key>
             <PropertyRef Name="idinfo" />
@@ -39,27 +39,23 @@
           <Property Name="lat" Type="float" Nullable="false" />
           <Property Name="lan" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Data.dbo.prop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="prop">
           <Key>
-            <PropertyRef Name="AC" />
-            <PropertyRef Name="Parking" />
-            <PropertyRef Name="DParking" />
-            <PropertyRef Name="Eleveter" />
-            <PropertyRef Name="Negisot" />
-            <PropertyRef Name="id sale" />
-            <PropertyRef Name="id store" />
-            <PropertyRef Name="idPlace" />
+            <PropertyRef Name="id_prop" />
           </Key>
-          <Property Name="AC" Type="bit" Nullable="false" />
-          <Property Name="Parking" Type="bit" Nullable="false" />
-          <Property Name="DParking" Type="bit" Nullable="false" />
-          <Property Name="Eleveter" Type="bit" Nullable="false" />
-          <Property Name="Negisot" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="id sale" Type="int" Nullable="false" />
+          <Property Name="Cleanlike" Type="int" Nullable="false" />
+          <Property Name="Parkinglike" Type="int" Nullable="false" />
+          <Property Name="DParkinglike" Type="int" Nullable="false" />
+          <Property Name="Eleveterlike" Type="int" Nullable="false" />
+          <Property Name="Negisotlike" Type="int" Nullable="false" />
+          <Property Name="id_sale" Type="int" Nullable="false" />
           <Property Name="id store" Type="int" Nullable="false" />
-          <Property Name="idPlace" Type="int" Nullable="false" />
+          <Property Name="Cleandislike" Type="int" Nullable="false" />
+          <Property Name="Parkingdislike" Type="int" Nullable="false" />
+          <Property Name="DParkingdislike" Type="int" Nullable="false" />
+          <Property Name="Elevatordislike" Type="int" Nullable="false" />
+          <Property Name="Negisotdislike" Type="int" Nullable="false" />
+          <Property Name="id_prop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale Time">
           <Key>
@@ -72,17 +68,23 @@ warning 6002: The table/view 'Data.dbo.prop' does not have a primary key defined
           <Property Name="saleName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Describe" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Data.dbo.store' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="store">
           <Key>
             <PropertyRef Name="id store" />
-            <PropertyRef Name="type" />
-            <PropertyRef Name="idPlace" />
           </Key>
           <Property Name="id store" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idPlace" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -152,6 +154,42 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_prop_Sale Time">
+          <End Role="Sale Time" Type="Self.Sale Time" Multiplicity="1" />
+          <End Role="prop" Type="Self.prop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale Time">
+              <PropertyRef Name="idSale" />
+            </Principal>
+            <Dependent Role="prop">
+              <PropertyRef Name="id_sale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prop_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="prop" Type="Self.prop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="id store" />
+            </Principal>
+            <Dependent Role="prop">
+              <PropertyRef Name="id store" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_store_Place">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="store" Type="Self.store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="idPlace" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="idPlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Updates_Place">
           <End Role="Place" Type="Self.Place" Multiplicity="1" />
           <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
@@ -180,28 +218,12 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <EntitySet Name="information" EntityType="Self.information" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prop" EntityType="Self.prop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale Time" EntityType="Self.Sale Time" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="time" EntityType="Self.time" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="prop" EntityType="Self.prop" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [prop].[AC] AS [AC], 
-    [prop].[Parking] AS [Parking], 
-    [prop].[DParking] AS [DParking], 
-    [prop].[Eleveter] AS [Eleveter], 
-    [prop].[Negisot] AS [Negisot], 
-    [prop].[id sale] AS [id sale], 
-    [prop].[id store] AS [id store], 
-    [prop].[idPlace] AS [idPlace]
-    FROM [dbo].[prop] AS [prop]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="store" EntityType="Self.store" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [store].[id store] AS [id store], 
-    [store].[type] AS [type], 
-    [store].[idPlace] AS [idPlace]
-    FROM [dbo].[store] AS [store]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Table_1" EntityType="Self.Table_1" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Table_1].[id sale] AS [id sale], 
@@ -220,6 +242,18 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             <End Role="time" EntitySet="time" />
             <End Role="information" EntitySet="information" />
           </AssociationSet>
+          <AssociationSet Name="FK_prop_Sale Time" Association="Self.FK_prop_Sale Time">
+            <End Role="Sale Time" EntitySet="Sale Time" />
+            <End Role="prop" EntitySet="prop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prop_store" Association="Self.FK_prop_store">
+            <End Role="store" EntitySet="store" />
+            <End Role="prop" EntitySet="prop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_Place" Association="Self.FK_store_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="store" EntitySet="store" />
+          </AssociationSet>
           <AssociationSet Name="FK_Updates_Place" Association="Self.FK_Updates_Place">
             <End Role="Place" EntitySet="Place" />
             <End Role="Updates" EntitySet="Updates" />
@@ -229,11 +263,54 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             <End Role="Updates" EntitySet="Updates" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataEntities771" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="information" EntityType="DataModel.information" />
+          <EntitySet Name="Person" EntityType="DataModel.Person" />
+          <EntitySet Name="Place" EntityType="DataModel.Place" />
+          <EntitySet Name="prop" EntityType="DataModel.prop" />
+          <EntitySet Name="Sale_Time" EntityType="DataModel.Sale_Time" />
+          <EntitySet Name="store" EntityType="DataModel.store" />
+          <EntitySet Name="sysdiagrams" EntityType="DataModel.sysdiagrams" />
+          <EntitySet Name="time" EntityType="DataModel.time" />
+          <EntitySet Name="Updates" EntityType="DataModel.Updates" />
+          <EntitySet Name="Table_1" EntityType="DataModel.Table_1" />
+          <AssociationSet Name="FK_information_Person" Association="DataModel.FK_information_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="information" EntitySet="information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_information_Place" Association="DataModel.FK_information_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="information" EntitySet="information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_information_time" Association="DataModel.FK_information_time">
+            <End Role="time" EntitySet="time" />
+            <End Role="information" EntitySet="information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_Place" Association="DataModel.FK_store_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="store" EntitySet="store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Updates_Place" Association="DataModel.FK_Updates_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Updates" EntitySet="Updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prop_Sale_Time" Association="DataModel.FK_prop_Sale_Time">
+            <End Role="Sale_Time" EntitySet="Sale_Time" />
+            <End Role="prop" EntitySet="prop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prop_store" Association="DataModel.FK_prop_store">
+            <End Role="store" EntitySet="store" />
+            <End Role="prop" EntitySet="prop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Updates_Sale_Time" Association="DataModel.FK_Updates_Sale_Time">
+            <End Role="Sale_Time" EntitySet="Sale_Time" />
+            <End Role="Updates" EntitySet="Updates" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="information">
           <Key>
             <PropertyRef Name="idinfo" />
@@ -245,13 +322,13 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <Property Name="stieeeeeeee" Type="Int32" Nullable="false" />
           <Property Name="max" Type="Int32" Nullable="false" />
           <Property Name="min" Type="Int32" Nullable="false" />
-          <Property Name="timeofYaer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="timeofYaer" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="commend" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="idperson" Type="Int32" Nullable="false" />
           <Property Name="idinfo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_information_Person" FromRole="information" ToRole="Person" />
-          <NavigationProperty Name="Place" Relationship="Self.FK_information_Place" FromRole="information" ToRole="Place" />
-          <NavigationProperty Name="time" Relationship="Self.FK_information_time" FromRole="information" ToRole="time" />
+          <NavigationProperty Name="Person" Relationship="DataModel.FK_information_Person" FromRole="information" ToRole="Person" />
+          <NavigationProperty Name="Place" Relationship="DataModel.FK_information_Place" FromRole="information" ToRole="Place" />
+          <NavigationProperty Name="time" Relationship="DataModel.FK_information_time" FromRole="information" ToRole="time" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -259,9 +336,9 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           </Key>
           <Property Name="idperson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="information" Relationship="Self.FK_information_Person" FromRole="Person" ToRole="information" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="information" Relationship="DataModel.FK_information_Person" FromRole="Person" ToRole="information" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -271,8 +348,29 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lat" Type="Double" Nullable="false" />
           <Property Name="lan" Type="Double" Nullable="false" />
-          <NavigationProperty Name="information" Relationship="Self.FK_information_Place" FromRole="Place" ToRole="information" />
-          <NavigationProperty Name="Updates" Relationship="Self.FK_Updates_Place" FromRole="Place" ToRole="Updates" />
+          <NavigationProperty Name="information" Relationship="DataModel.FK_information_Place" FromRole="Place" ToRole="information" />
+          <NavigationProperty Name="store" Relationship="DataModel.FK_store_Place" FromRole="Place" ToRole="store" />
+          <NavigationProperty Name="Updates" Relationship="DataModel.FK_Updates_Place" FromRole="Place" ToRole="Updates" />
+        </EntityType>
+        <EntityType Name="prop">
+          <Key>
+            <PropertyRef Name="id_prop" />
+          </Key>
+          <Property Name="Cleanlike" Type="Int32" Nullable="false" />
+          <Property Name="Parkinglike" Type="Int32" Nullable="false" />
+          <Property Name="DParkinglike" Type="Int32" Nullable="false" />
+          <Property Name="Eleveterlike" Type="Int32" Nullable="false" />
+          <Property Name="Negisotlike" Type="Int32" Nullable="false" />
+          <Property Name="id_sale" Type="Int32" Nullable="false" />
+          <Property Name="id_store" Type="Int32" Nullable="false" />
+          <Property Name="Cleandislike" Type="Int32" Nullable="false" />
+          <Property Name="Parkingdislike" Type="Int32" Nullable="false" />
+          <Property Name="DParkingdislike" Type="Int32" Nullable="false" />
+          <Property Name="Elevatordislike" Type="Int32" Nullable="false" />
+          <Property Name="Negisotdislike" Type="Int32" Nullable="false" />
+          <Property Name="id_prop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sale_Time" Relationship="DataModel.FK_prop_Sale_Time" FromRole="prop" ToRole="Sale_Time" />
+          <NavigationProperty Name="store" Relationship="DataModel.FK_prop_store" FromRole="prop" ToRole="store" />
         </EntityType>
         <EntityType Name="Sale_Time">
           <Key>
@@ -282,19 +380,40 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <Property Name="storid" Type="Int32" Nullable="false" />
           <Property Name="start" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="saleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Updates" Relationship="Self.FK_Updates_Sale_Time" FromRole="Sale_Time" ToRole="Updates" />
+          <Property Name="saleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Describe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="prop" Relationship="DataModel.FK_prop_Sale_Time" FromRole="Sale_Time" ToRole="prop" />
+          <NavigationProperty Name="Updates" Relationship="DataModel.FK_Updates_Sale_Time" FromRole="Sale_Time" ToRole="Updates" />
+        </EntityType>
+        <EntityType Name="store">
+          <Key>
+            <PropertyRef Name="id_store" />
+          </Key>
+          <Property Name="id_store" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idPlace" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="DataModel.FK_store_Place" FromRole="store" ToRole="Place" />
+          <NavigationProperty Name="prop" Relationship="DataModel.FK_prop_store" FromRole="store" ToRole="prop" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="time">
           <Key>
             <PropertyRef Name="idTime" />
           </Key>
           <Property Name="idTime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="from" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="until" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="information" Relationship="Self.FK_information_time" FromRole="time" ToRole="information" />
+          <NavigationProperty Name="information" Relationship="DataModel.FK_information_time" FromRole="time" ToRole="information" />
         </EntityType>
         <EntityType Name="Updates">
           <Key>
@@ -306,40 +425,10 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <Property Name="time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="count" Type="Int32" Nullable="false" />
           <Property Name="ip" Type="Int32" Nullable="false" />
-          <Property Name="ps" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="idSale" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Place" Relationship="Self.FK_Updates_Place" FromRole="Updates" ToRole="Place" />
-          <NavigationProperty Name="Sale_Time" Relationship="Self.FK_Updates_Sale_Time" FromRole="Updates" ToRole="Sale_Time" />
-        </EntityType>
-        <EntityType Name="prop">
-          <Key>
-            <PropertyRef Name="AC" />
-            <PropertyRef Name="Parking" />
-            <PropertyRef Name="DParking" />
-            <PropertyRef Name="Eleveter" />
-            <PropertyRef Name="Negisot" />
-            <PropertyRef Name="id_sale" />
-            <PropertyRef Name="id_store" />
-            <PropertyRef Name="idPlace" />
-          </Key>
-          <Property Name="AC" Type="Boolean" Nullable="false" />
-          <Property Name="Parking" Type="Boolean" Nullable="false" />
-          <Property Name="DParking" Type="Boolean" Nullable="false" />
-          <Property Name="Eleveter" Type="Boolean" Nullable="false" />
-          <Property Name="Negisot" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="id_sale" Type="Int32" Nullable="false" />
-          <Property Name="id_store" Type="Int32" Nullable="false" />
-          <Property Name="idPlace" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="store">
-          <Key>
-            <PropertyRef Name="id_store" />
-            <PropertyRef Name="type" />
-            <PropertyRef Name="idPlace" />
-          </Key>
-          <Property Name="id_store" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPlace" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="DataModel.FK_Updates_Place" FromRole="Updates" ToRole="Place" />
+          <NavigationProperty Name="Sale_Time" Relationship="DataModel.FK_Updates_Sale_Time" FromRole="Updates" ToRole="Sale_Time" />
         </EntityType>
         <EntityType Name="Table_1">
           <Key>
@@ -350,8 +439,8 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           <Property Name="id_store" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_information_Person">
-          <End Role="Person" Type="Self.Person" Multiplicity="1" />
-          <End Role="information" Type="Self.information" Multiplicity="*" />
+          <End Type="DataModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="DataModel.information" Role="information" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person">
               <PropertyRef Name="idperson" />
@@ -362,8 +451,8 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_information_Place">
-          <End Role="Place" Type="Self.Place" Multiplicity="1" />
-          <End Role="information" Type="Self.information" Multiplicity="*" />
+          <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="DataModel.information" Role="information" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Place">
               <PropertyRef Name="idPlace" />
@@ -374,8 +463,8 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_information_time">
-          <End Role="time" Type="Self.time" Multiplicity="1" />
-          <End Role="information" Type="Self.information" Multiplicity="*" />
+          <End Type="DataModel.time" Role="time" Multiplicity="1" />
+          <End Type="DataModel.information" Role="information" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="time">
               <PropertyRef Name="idTime" />
@@ -385,9 +474,21 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_store_Place">
+          <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="DataModel.store" Role="store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="idPlace" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="idPlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Updates_Place">
-          <End Role="Place" Type="Self.Place" Multiplicity="1" />
-          <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+          <End Type="DataModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="DataModel.Updates" Role="Updates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Place">
               <PropertyRef Name="idPlace" />
@@ -397,9 +498,33 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_prop_Sale_Time">
+          <End Type="DataModel.Sale_Time" Role="Sale_Time" Multiplicity="1" />
+          <End Type="DataModel.prop" Role="prop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale_Time">
+              <PropertyRef Name="idSale" />
+            </Principal>
+            <Dependent Role="prop">
+              <PropertyRef Name="id_sale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prop_store">
+          <End Type="DataModel.store" Role="store" Multiplicity="1" />
+          <End Type="DataModel.prop" Role="prop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="id_store" />
+            </Principal>
+            <Dependent Role="prop">
+              <PropertyRef Name="id_store" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Updates_Sale_Time">
-          <End Role="Sale_Time" Type="Self.Sale_Time" Multiplicity="1" />
-          <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+          <End Type="DataModel.Sale_Time" Role="Sale_Time" Multiplicity="1" />
+          <End Type="DataModel.Updates" Role="Updates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sale_Time">
               <PropertyRef Name="idSale" />
@@ -409,144 +534,129 @@ warning 6002: The table/view 'Data.dbo.Table_1' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DataEntities7" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="information" EntityType="Self.information" />
-          <EntitySet Name="Person" EntityType="Self.Person" />
-          <EntitySet Name="Place" EntityType="Self.Place" />
-          <EntitySet Name="Sale_Time" EntityType="Self.Sale_Time" />
-          <EntitySet Name="time" EntityType="Self.time" />
-          <EntitySet Name="Updates" EntityType="Self.Updates" />
-          <EntitySet Name="prop" EntityType="Self.prop" />
-          <EntitySet Name="store" EntityType="Self.store" />
-          <EntitySet Name="Table_1" EntityType="Self.Table_1" />
-          <AssociationSet Name="FK_information_Person" Association="Self.FK_information_Person">
-            <End Role="Person" EntitySet="Person" />
-            <End Role="information" EntitySet="information" />
-          </AssociationSet>
-          <AssociationSet Name="FK_information_Place" Association="Self.FK_information_Place">
-            <End Role="Place" EntitySet="Place" />
-            <End Role="information" EntitySet="information" />
-          </AssociationSet>
-          <AssociationSet Name="FK_information_time" Association="Self.FK_information_time">
-            <End Role="time" EntitySet="time" />
-            <End Role="information" EntitySet="information" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Updates_Place" Association="Self.FK_Updates_Place">
-            <End Role="Place" EntitySet="Place" />
-            <End Role="Updates" EntitySet="Updates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Updates_Sale_Time" Association="Self.FK_Updates_Sale_Time">
-            <End Role="Sale_Time" EntitySet="Sale_Time" />
-            <End Role="Updates" EntitySet="Updates" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities7">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities771">
           <EntitySetMapping Name="information">
             <EntityTypeMapping TypeName="DataModel.information">
               <MappingFragment StoreEntitySet="information">
-                <ScalarProperty Name="idPlace" ColumnName="idPlace" />
-                <ScalarProperty Name="idTime" ColumnName="idTime" />
-                <ScalarProperty Name="numPepol" ColumnName="numPepol" />
-                <ScalarProperty Name="avg" ColumnName="avg" />
-                <ScalarProperty Name="stieeeeeeee" ColumnName="stieeeeeeee" />
-                <ScalarProperty Name="max" ColumnName="max" />
-                <ScalarProperty Name="min" ColumnName="min" />
-                <ScalarProperty Name="timeofYaer" ColumnName="timeofYaer" />
-                <ScalarProperty Name="commend" ColumnName="commend" />
-                <ScalarProperty Name="idperson" ColumnName="idperson" />
                 <ScalarProperty Name="idinfo" ColumnName="idinfo" />
+                <ScalarProperty Name="idperson" ColumnName="idperson" />
+                <ScalarProperty Name="commend" ColumnName="commend" />
+                <ScalarProperty Name="timeofYaer" ColumnName="timeofYaer" />
+                <ScalarProperty Name="min" ColumnName="min" />
+                <ScalarProperty Name="max" ColumnName="max" />
+                <ScalarProperty Name="stieeeeeeee" ColumnName="stieeeeeeee" />
+                <ScalarProperty Name="avg" ColumnName="avg" />
+                <ScalarProperty Name="numPepol" ColumnName="numPepol" />
+                <ScalarProperty Name="idTime" ColumnName="idTime" />
+                <ScalarProperty Name="idPlace" ColumnName="idPlace" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="DataModel.Person">
               <MappingFragment StoreEntitySet="Person">
-                <ScalarProperty Name="idperson" ColumnName="idperson" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="idperson" ColumnName="idperson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Place">
             <EntityTypeMapping TypeName="DataModel.Place">
               <MappingFragment StoreEntitySet="Place">
-                <ScalarProperty Name="idPlace" ColumnName="idPlace" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="lat" ColumnName="lat" />
                 <ScalarProperty Name="lan" ColumnName="lan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sale_Time">
-            <EntityTypeMapping TypeName="DataModel.Sale_Time">
-              <MappingFragment StoreEntitySet="Sale Time">
-                <ScalarProperty Name="idSale" ColumnName="idSale" />
-                <ScalarProperty Name="storid" ColumnName="storid" />
-                <ScalarProperty Name="start" ColumnName="start" />
-                <ScalarProperty Name="end" ColumnName="end" />
-                <ScalarProperty Name="saleName" ColumnName="saleName" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="time">
-            <EntityTypeMapping TypeName="DataModel.time">
-              <MappingFragment StoreEntitySet="time">
-                <ScalarProperty Name="idTime" ColumnName="idTime" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="from" ColumnName="from" />
-                <ScalarProperty Name="until" ColumnName="until" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Updates">
-            <EntityTypeMapping TypeName="DataModel.Updates">
-              <MappingFragment StoreEntitySet="Updates">
-                <ScalarProperty Name="idUpdats" ColumnName="idUpdats" />
                 <ScalarProperty Name="idPlace" ColumnName="idPlace" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="count" ColumnName="count" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="ps" ColumnName="ps" />
-                <ScalarProperty Name="idSale" ColumnName="idSale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="prop">
             <EntityTypeMapping TypeName="DataModel.prop">
               <MappingFragment StoreEntitySet="prop">
-                <ScalarProperty Name="AC" ColumnName="AC" />
-                <ScalarProperty Name="Parking" ColumnName="Parking" />
-                <ScalarProperty Name="DParking" ColumnName="DParking" />
-                <ScalarProperty Name="Eleveter" ColumnName="Eleveter" />
-                <ScalarProperty Name="Negisot" ColumnName="Negisot" />
-                <ScalarProperty Name="id_sale" ColumnName="id sale" />
+                <ScalarProperty Name="id_prop" ColumnName="id_prop" />
+                <ScalarProperty Name="Negisotdislike" ColumnName="Negisotdislike" />
+                <ScalarProperty Name="Elevatordislike" ColumnName="Elevatordislike" />
+                <ScalarProperty Name="DParkingdislike" ColumnName="DParkingdislike" />
+                <ScalarProperty Name="Parkingdislike" ColumnName="Parkingdislike" />
+                <ScalarProperty Name="Cleandislike" ColumnName="Cleandislike" />
                 <ScalarProperty Name="id_store" ColumnName="id store" />
-                <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+                <ScalarProperty Name="id_sale" ColumnName="id_sale" />
+                <ScalarProperty Name="Negisotlike" ColumnName="Negisotlike" />
+                <ScalarProperty Name="Eleveterlike" ColumnName="Eleveterlike" />
+                <ScalarProperty Name="DParkinglike" ColumnName="DParkinglike" />
+                <ScalarProperty Name="Parkinglike" ColumnName="Parkinglike" />
+                <ScalarProperty Name="Cleanlike" ColumnName="Cleanlike" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale_Time">
+            <EntityTypeMapping TypeName="DataModel.Sale_Time">
+              <MappingFragment StoreEntitySet="Sale Time">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="saleName" ColumnName="saleName" />
+                <ScalarProperty Name="end" ColumnName="end" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="storid" ColumnName="storid" />
+                <ScalarProperty Name="idSale" ColumnName="idSale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="store">
             <EntityTypeMapping TypeName="DataModel.store">
               <MappingFragment StoreEntitySet="store">
-                <ScalarProperty Name="id_store" ColumnName="id store" />
-                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id_store" ColumnName="id store" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DataModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="time">
+            <EntityTypeMapping TypeName="DataModel.time">
+              <MappingFragment StoreEntitySet="time">
+                <ScalarProperty Name="until" ColumnName="until" />
+                <ScalarProperty Name="from" ColumnName="from" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idTime" ColumnName="idTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Updates">
+            <EntityTypeMapping TypeName="DataModel.Updates">
+              <MappingFragment StoreEntitySet="Updates">
+                <ScalarProperty Name="idSale" ColumnName="idSale" />
+                <ScalarProperty Name="ps" ColumnName="ps" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="idPlace" ColumnName="idPlace" />
+                <ScalarProperty Name="idUpdats" ColumnName="idUpdats" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Table_1">
             <EntityTypeMapping TypeName="DataModel.Table_1">
               <MappingFragment StoreEntitySet="Table_1">
-                <ScalarProperty Name="id_sale" ColumnName="id sale" />
                 <ScalarProperty Name="id_store" ColumnName="id store" />
+                <ScalarProperty Name="id_sale" ColumnName="id sale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

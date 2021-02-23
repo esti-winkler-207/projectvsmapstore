@@ -12,7 +12,7 @@ namespace BLL
     public class informationBLL 
     {//עשיתי משהו שונה ואני לא זוכרת למה קישרתי את הכל לקלאס ושם עשיתי את החיבור עם 
         //המסד אין לי מושג למה עשיתי את זה ואם זה בכלל הדרך הנכונה אז צריך לעבור על זה
-        static DataEntities7 MyDB = new DataEntities7();
+        static DataEntities771 MyDB = new DataEntities771();
 
         //GetInformation
         public static List<DTO.InformationDTO> GetAll()

@@ -11,7 +11,7 @@ namespace DAL1
 
         public static Person getByNameAndPwd(Person person)
         {
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 //for (int i = 0; i < db.information.Count(); i++)
                 //{
@@ -40,7 +40,7 @@ namespace DAL1
         public static Person Check_user(string Password, string username)
         {
 
-            using (DataEntities7 db = new DataEntities7())
+            using (DataEntities771 db = new DataEntities771())
             {
                 Person user = db.Person.FirstOrDefault(p => p.Pwd == Password && p.Name == username);
                 return user;

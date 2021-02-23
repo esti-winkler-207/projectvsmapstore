@@ -10,7 +10,7 @@ namespace BLL
 {
     public class propBLL
     {
-        static DataEntities7 MyDB = new DataEntities7();
+        static DataEntities771 MyDB = new DataEntities771();
 
         //GetAllUser
         public static List<propDTO> GetAll()
@@ -44,17 +44,17 @@ namespace BLL
         }
         //FindUser
         //
-        public static int Get(int id, string pname)
-        {
-            var item = MyDB.prop.FirstOrDefault(u1 => u1.idPlace == id);
-            //להוסיף בשליפה גם לפי שם
-            if (item==null)
-            {
-                return 0;
-            }
-            return 1;
+        //public static int Get(int id, string pname)
+        //{
+        //    var item = MyDB.prop.FirstOrDefault(u1 => u1.idPlace == id);
+        //    //להוסיף בשליפה גם לפי שם
+        //    if (item==null)
+        //    {
+        //        return 0;
+        //    }
+        //    return 1;
 
-        }
+        //}
 
     }
 }

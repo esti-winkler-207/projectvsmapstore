@@ -9,15 +9,19 @@ namespace DTO
 {
   public   class propDTO
     {
-        public bool AC { get; set; }
-        public bool Parking { get; set; }
-        public bool DParking { get; set; }
-        public bool Eleveter { get; set; }
-        public string Negisot { get; set; }
+        public int Cleanlike { get; set; }
+        public int Parkinglike { get; set; }
+        public int DParkinglike { get; set; }
+        public int Eleveterlike { get; set; }
+        public int Negisotlike { get; set; }
         public int id_sale { get; set; }
         public int id_store { get; set; }
-        public int idPlace { get; set; }
-
+        
+        public int Cleandislike { get; set; }
+        public int Parkingdislike { get; set; }
+        public int DParkingdislike { get; set; }
+        public int Elevatordislike { get; set; }
+        public int Negisotdislike { get; set; }
 
 
         //convert
@@ -26,14 +30,15 @@ namespace DTO
         public static prop fromDTOtoDAL(propDTO p)
         {
             prop p1 = new prop();
-            p1.AC = p.AC;
-            p1.Parking = p.Parking;
-            p1.DParking = p.DParking;
-            p1.Eleveter = p.Eleveter;
-            p1.Negisot = p.Negisot;
+            p1.Cleandislike=p.Cleandislike;
+            p1.Cleanlike = p.Cleanlike;
+            p1.DParkingdislike = p.DParkingdislike;
+            p1.DParkinglike = p1.DParkinglike;
+            p1.Elevatordislike = p1.Elevatordislike;
+            p1.Eleveterlike = p1.Eleveterlike;
             p1.id_sale = p.id_sale;
             p1.id_store = p.id_store;
-            p1.idPlace = p.idPlace;
+            
             return p1;
         }
 
@@ -41,14 +46,15 @@ namespace DTO
         public static propDTO fromDALtoDTO(prop p)
         {
             propDTO p1 = new propDTO();
-            p1.AC = p.AC;
-            p1.Parking = p.Parking;
-            p1.DParking = p.DParking;
-            p1.Eleveter = p.Eleveter;
-            p1.Negisot = p.Negisot;
+            p1.Cleandislike = p.Cleandislike;
+            p1.Cleanlike = p.Cleanlike;
+            p1.DParkingdislike = p.DParkingdislike;
+            p1.DParkinglike = p1.DParkinglike;
+            p1.Elevatordislike = p1.Elevatordislike;
+            p1.Eleveterlike = p1.Eleveterlike;
             p1.id_sale = p.id_sale;
             p1.id_store = p.id_store;
-            p1.idPlace = p.idPlace;
+            
             return p1;
         }
         //3

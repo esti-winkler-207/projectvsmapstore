@@ -17,6 +17,7 @@ namespace DAL1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sale_Time()
         {
+            this.prop = new HashSet<prop>();
             this.Updates = new HashSet<Updates>();
         }
     
@@ -27,6 +28,8 @@ namespace DAL1
         public string saleName { get; set; }
         public string Describe { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prop> prop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Updates> Updates { get; set; }
     }

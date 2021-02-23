@@ -14,8 +14,18 @@ namespace DAL1
     
     public partial class store
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public store()
+        {
+            this.prop = new HashSet<prop>();
+        }
+    
         public int id_store { get; set; }
         public string type { get; set; }
         public int idPlace { get; set; }
+    
+        public virtual Place Place { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prop> prop { get; set; }
     }
 }

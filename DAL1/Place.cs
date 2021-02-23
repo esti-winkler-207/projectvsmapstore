@@ -18,6 +18,7 @@ namespace DAL1
         public Place()
         {
             this.information = new HashSet<information>();
+            this.store = new HashSet<store>();
             this.Updates = new HashSet<Updates>();
         }
     
@@ -28,6 +29,8 @@ namespace DAL1
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<information> information { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<store> store { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Updates> Updates { get; set; }
     }
